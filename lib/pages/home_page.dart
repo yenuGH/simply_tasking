@@ -35,6 +35,35 @@ class _HomePageState extends State<HomePage> {
           addTableDate(),
         ],
       ),
+      floatingActionButton: addFloatingActionButton(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+    );
+  }
+
+  // shows a button for adding a task
+  FloatingActionButton addFloatingActionButton() {
+    return FloatingActionButton.extended(
+      onPressed: () {},
+      tooltip: "Add a task.",
+      icon: const Icon(Icons.add),
+      label: const Text("Add a task!"),
+      elevation: 4.0,
+    );
+  }
+
+  // shows the bottom navigation bar
+  BottomNavigationBar addBottomNavigationBar() {
+    return BottomNavigationBar(
+      items: const [
+        BottomNavigationBarItem(
+          icon: Icon(Icons.play_arrow),
+          label: 'Add Task',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.play_arrow),
+          label: 'Add Task',
+        ),
+      ],
     );
   }
 
