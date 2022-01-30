@@ -13,7 +13,7 @@ class Themes {
 }
 
 TextStyle get subHeadingStyle {
-  return GoogleFonts.lato(
+  return GoogleFonts.urbanist(
     textStyle: const TextStyle(
       fontSize: 24,
       fontWeight: FontWeight.bold,
@@ -22,7 +22,7 @@ TextStyle get subHeadingStyle {
 }
 
 TextStyle get headingStyle {
-  return GoogleFonts.lato(
+  return GoogleFonts.urbanist(
     textStyle: const TextStyle(
       fontSize: 30,
       fontWeight: FontWeight.bold,
