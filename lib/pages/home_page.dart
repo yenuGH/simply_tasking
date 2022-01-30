@@ -43,11 +43,18 @@ class _HomePageState extends State<HomePage> {
   // shows a button for adding a task
   FloatingActionButton addFloatingActionButton() {
     return FloatingActionButton.extended(
+      isExtended: true,
       onPressed: () {},
-      tooltip: "Add a task.",
-      icon: const Icon(Icons.add),
-      label: const Text("Add a task!"),
+      icon: const Icon(
+        Icons.add,
+        color: Colors.black,
+      ),
+      label: const Text(
+        "Add a task!",
+        style: TextStyle(color: Colors.black),
+      ),
       elevation: 4.0,
+      backgroundColor: Colors.blue,
     );
   }
 
