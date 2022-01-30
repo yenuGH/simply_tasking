@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:simply_tasking/pages/home_page.dart';
 //import 'package:get_storage/get_storage.dart';
 //import 'package:simply_tasking/utilities/theme_changer.dart';
@@ -16,7 +17,7 @@ class SimplyTasking extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Simply Tasking',
       debugShowCheckedModeBanner: false, // removing the debug banner
       theme: Themes.lightMode,

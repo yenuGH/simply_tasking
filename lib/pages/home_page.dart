@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 // separate files
 import 'package:simply_tasking/utilities/themes.dart';
 import 'package:simply_tasking/widgets/app_drawer.dart';
+import 'package:simply_tasking/pages/add_task_page.dart';
 
 // external packages
 import 'package:intl/intl.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:get/get.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -44,7 +46,9 @@ class _HomePageState extends State<HomePage> {
   FloatingActionButton addFloatingActionButton() {
     return FloatingActionButton.extended(
       isExtended: true,
-      onPressed: () {},
+      onPressed: () {
+        Get.to(() => const AddTaskPage());
+      },
       icon: const Icon(
         Icons.add,
         color: Colors.black,
