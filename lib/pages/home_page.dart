@@ -91,6 +91,9 @@ class _HomePageState extends State<HomePage> {
           // the time-part of compared DateTime objects.
           return isSameDay(_selectedDay, day);
         },
+        onDayLongPressed: (selectedDay, focusedDay) {
+          Get.to(() => const AddTaskPage());
+        },
         onDaySelected: (selectedDay, focusedDay) {
           if (!isSameDay(_selectedDay, selectedDay)) {
             // Call `setState()` when updating the selected day

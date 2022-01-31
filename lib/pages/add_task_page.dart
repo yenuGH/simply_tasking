@@ -18,6 +18,12 @@ class _AddTaskPageState extends State<AddTaskPage> {
   String startTime = DateFormat("h:mm a").format(DateTime.now()).toString();
   String endTime = DateFormat("h:mm a").format(DateTime.now()).toString();
 
+  int remindTime = 5;
+  List<int> remindTimes = [5, 10, 15, 20, 25, 30];
+
+  String repeatTime = "None";
+  List<String> repeatTimes = ["None", "Daily", "Weekly", "Monthly"];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,14 +45,17 @@ class _AddTaskPageState extends State<AddTaskPage> {
                 "Add a task...",
                 style: headingStyle,
               ),
+              // Title
               const InputTextField(
                 title: "Title",
                 hint: "Enter a title...",
               ),
+              // Description
               const DescriptionTextField(
                 title: "Description",
                 hint: "Enter a description...",
               ),
+              // Due Date
               InputTextField(
                 title: "Due Date",
                 hint: "Selected due date: " +
@@ -59,6 +68,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   },
                 ),
               ),
+              // Start Time / End Time
               Row(
                 children: <Widget>[
                   Expanded(
@@ -96,10 +106,101 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   ),
                 ],
               ),
+              // Remind Me
+              InputTextField(
+                title: "Set Reminder",
+                hint: remindTime.toString() + " minutes before",
+                widget: DropdownButton(
+                  icon: const Icon(
+                    Icons.keyboard_arrow_down,
+                    color: Colors.grey,
+                  ),
+                  iconSize: 30,
+                  elevation: 4,
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
+                  underline: Container(
+                    height: 0,
+                  ),
+                  items: remindTimes.map<DropdownMenuItem<String>>((int value) {
+                    return DropdownMenuItem<String>(
+                      value: value.toString(),
+                      child: Text(value.toString() + " minutes"),
+                    );
+                  }).toList(),
+                  onChanged: (String? value) {
+                    setState(() {
+                      remindTime = int.parse(value!);
+                    });
+                  },
+                ),
+              ),
+              // Repeat
+              InputTextField(
+                title: "Set Repeat Interval",
+                hint: repeatTime,
+                widget: DropdownButton(
+                  icon: const Icon(
+                    Icons.keyboard_arrow_down,
+                    color: Colors.grey,
+                  ),
+                  iconSize: 30,
+                  elevation: 4,
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
+                  underline: Container(
+                    height: 0,
+                  ),
+                  items:
+                      repeatTimes.map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                  onChanged: (String? value) {
+                    setState(() {
+                      repeatTime = value!;
+                    });
+                  },
+                ),
+              ),
+              // Add task button
+              Container(
+                margin: const EdgeInsets.only(top: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    addFloatingActionButton(),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  // shows a button for adding a task
+  FloatingActionButton addFloatingActionButton() {
+    return FloatingActionButton.extended(
+      isExtended: true,
+      onPressed: () {
+        Get.to(() => const AddTaskPage());
+      },
+      icon: const Icon(
+        Icons.add,
+        color: Colors.black,
+      ),
+      label: const Text(
+        "Create Task",
+        style: TextStyle(color: Colors.black),
+      ),
+      elevation: 4.0,
+      backgroundColor: Colors.blue,
     );
   }
 
