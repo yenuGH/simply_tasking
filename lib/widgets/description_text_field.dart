@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class InputTextField extends StatelessWidget {
+class DescriptionTextField extends StatelessWidget {
   final String title;
   final String hint;
   final TextEditingController? controller;
   final Widget? widget;
 
-  const InputTextField(
+  const DescriptionTextField(
       {Key? key,
       required this.title,
       required this.hint,
@@ -30,7 +30,7 @@ class InputTextField extends StatelessWidget {
             ),
           ),
           Container(
-            height: 52,
+            height: 150,
             margin: const EdgeInsets.only(top: 8),
             decoration: BoxDecoration(
               border: Border.all(
@@ -46,25 +46,31 @@ class InputTextField extends StatelessWidget {
               child: Row(
                 children: <Widget>[
                   Expanded(
-                    child: TextFormField(
-                      //keyboardType: TextInputType.multiline,
-                      //maxLines: null,
-                      readOnly: widget == null ? false : true,
-                      autofocus: false,
-                      cursorColor: Get.isDarkMode
-                          ? Colors.grey.shade100
-                          : Colors.grey.shade700,
-                      controller: controller,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: hint,
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: context.theme.backgroundColor,
-                            width: 0,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        TextFormField(
+                          //textAlign: TextAlign.bottom,
+                          keyboardType: TextInputType.multiline,
+                          maxLines: 6,
+                          readOnly: widget == null ? false : true,
+                          autofocus: false,
+                          cursorColor: Get.isDarkMode
+                              ? Colors.grey.shade100
+                              : Colors.grey.shade700,
+                          controller: controller,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: hint,
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: context.theme.backgroundColor,
+                                width: 0,
+                              ),
+                            ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
                   ),
                   widget == null ? Container() : Container(child: widget),
