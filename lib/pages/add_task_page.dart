@@ -13,6 +13,10 @@ class AddTaskPage extends StatefulWidget {
 }
 
 class _AddTaskPageState extends State<AddTaskPage> {
+  // These variables are used to validate the inputted data into the boxes
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController noteController = TextEditingController();
+
   // These variables are used to take advantage of setState() to redraw the page once a date/time has been selected
   DateTime selectedDate = DateTime.now();
   String startTime = DateFormat("h:mm a").format(DateTime.now()).toString();
@@ -184,12 +188,18 @@ class _AddTaskPageState extends State<AddTaskPage> {
     );
   }
 
+  validateDate() {
+    if (titleController.text.isNotEmpty && noteController.text.isNotEmpty) {
+      // TODO: add data to database
+    }
+  }
+
   // shows a button for adding a task
   FloatingActionButton addFloatingActionButton() {
     return FloatingActionButton.extended(
       isExtended: true,
       onPressed: () {
-        Get.to(() => const AddTaskPage());
+        Navigator.pop(context);
       },
       icon: const Icon(
         Icons.add,
