@@ -5,7 +5,7 @@ import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
   static Database? _database;
-  static final int _version = 2;
+  static final int _version = 1;
   static final String _tableName = "task";
 
   static Future<void> initDatabase() async {
