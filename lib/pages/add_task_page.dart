@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:simply_tasking/controller/task_controller.dart';
+import 'package:simply_tasking/model/task_data.dart';
 import 'package:simply_tasking/utilities/themes.dart';
 import 'package:simply_tasking/widgets/description_text_field.dart';
 import 'package:simply_tasking/widgets/input_text_field.dart';
@@ -13,6 +15,8 @@ class AddTaskPage extends StatefulWidget {
 }
 
 class _AddTaskPageState extends State<AddTaskPage> {
+  final TaskController taskController = Get.put(TaskController());
+
   // These variables are used to validate the inputted data into the boxes
   final TextEditingController titleController = TextEditingController();
   final TextEditingController noteController = TextEditingController();
@@ -50,14 +54,16 @@ class _AddTaskPageState extends State<AddTaskPage> {
                 style: headingStyle,
               ),
               // Title
-              const InputTextField(
+              InputTextField(
                 title: "Title",
                 hint: "Enter a title...",
+                controller: titleController,
               ),
               // Description
-              const DescriptionTextField(
+              DescriptionTextField(
                 title: "Description",
-                hint: "Enter a description...",
+                hint: checkDescription(), //"Enter a description...",
+                controller: noteController,
               ),
               // Due Date
               InputTextField(
@@ -188,10 +194,44 @@ class _AddTaskPageState extends State<AddTaskPage> {
     );
   }
 
-  validateDate() {
-    if (titleController.text.isNotEmpty && noteController.text.isNotEmpty) {
-      // TODO: add data to database
+  checkDescription() {
+    if (noteController.text.isEmpty) {
+      return "No description provided.";
     }
+    return noteController.text;
+  }
+
+  validateDate() {
+    if (titleController.text.isNotEmpty) {
+      sendToDatabase();
+      Get.back();
+    } else if (titleController.text.isEmpty) {
+      Get.snackbar(
+        "Required",
+        "You must give this task a name.",
+        snackPosition: SnackPosition.BOTTOM,
+        colorText: Colors.black,
+        backgroundColor: Colors.grey[50],
+        icon: const Icon(
+          Icons.warning_amber_rounded,
+          color: Colors.red,
+        ),
+      );
+    }
+  }
+
+  sendToDatabase() async {
+    int databaseID = await taskController.addTask(TaskData(
+      note: noteController.text,
+      title: titleController.text,
+      startTime: startTime,
+      endTime: endTime,
+      date: DateFormat.yMd().format(selectedDate),
+      reminderTimer: remindTime,
+      repeatInterval: repeatTime,
+      isCompleted: 0,
+    ));
+    print("Database ID: " + databaseID.toString());
   }
 
   // shows a button for adding a task
@@ -199,7 +239,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
     return FloatingActionButton.extended(
       isExtended: true,
       onPressed: () {
-        Navigator.pop(context);
+        //Navigator.pop(context);
+        validateDate();
       },
       icon: const Icon(
         Icons.add,

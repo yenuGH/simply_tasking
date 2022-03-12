@@ -40,6 +40,7 @@ dependencies:
   #flutter_native_timezone:
   date_picker_timeline:
   table_calendar:
+  sqflite:
 
 dev_dependencies:
   flutter_test:
