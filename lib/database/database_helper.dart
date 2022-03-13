@@ -22,7 +22,7 @@ class DatabaseHelper {
           "id INTEGER PRIMARY KEY AUTOINCREMENT,"
           "title STRING, note TEXT, date STRING,"
           "startTime STRING, endTime STRING,"
-          "reminderTimer INTEGER, repeatInterval STRING"
+          "reminderTimer INTEGER, repeatInterval STRING,"
           "isCompleted INTEGER)",
         );
       });
