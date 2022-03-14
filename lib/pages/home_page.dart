@@ -48,13 +48,14 @@ class _HomePageState extends State<HomePage> {
     return Expanded(
       child: Obx(() {
         return ListView.builder(
-          //itemCount: taskController.taskList.length,
+          padding: const EdgeInsets.all(10),
+          itemCount: 4, //taskController.taskList.length,
           itemBuilder: (_, context) {
             print(taskController.taskList.length);
             return Container(
               width: 100,
-              height: 50,
-              color: Colors.green,
+              height: 75,
+              color: Colors.grey[800],
               margin: const EdgeInsets.only(bottom: 10),
             );
           },

@@ -201,7 +201,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
       Get.back();
     } else if (titleController.text.isEmpty) {
       Get.snackbar(
-        "Required",
+        "Title is required!",
         "You must give this task a name.",
         snackPosition: SnackPosition.BOTTOM,
         colorText: Colors.black,
@@ -215,12 +215,14 @@ class _AddTaskPageState extends State<AddTaskPage> {
   }
 
   sendToDatabase() async {
-    int databaseID = await taskController.addTask(TaskData(
-      note: noteController.text,
-      title: titleController.text,
-      date: DateFormat.yMd().format(selectedDate),
-      isCompleted: 0,
-    ));
+    int databaseID = await taskController.addTask(
+      TaskData(
+        note: noteController.text,
+        title: titleController.text,
+        date: DateFormat.yMd().format(selectedDate),
+        isCompleted: 0,
+      ),
+    );
     print("Database ID value: " + databaseID.toString());
   }
 
@@ -237,7 +239,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
         color: Colors.black,
       ),
       label: const Text(
-        "Create Task",
+        "Create task!",
         style: TextStyle(color: Colors.black),
       ),
       elevation: 4.0,

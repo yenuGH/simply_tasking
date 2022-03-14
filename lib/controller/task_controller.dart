@@ -3,6 +3,10 @@ import 'package:simply_tasking/database/database_helper.dart';
 import 'package:simply_tasking/model/task_data.dart';
 
 class TaskController extends GetxController {
+  TaskController() {
+    getTasks();
+  }
+
   @override
   void onReady() {
     super.onReady();
