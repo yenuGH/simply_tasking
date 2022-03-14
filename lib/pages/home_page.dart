@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simply_tasking/controller/task_controller.dart';
 import 'package:simply_tasking/utilities/themes.dart';
 import 'package:simply_tasking/widgets/app_drawer.dart';
 import 'package:simply_tasking/pages/add_task_page.dart';
@@ -20,21 +21,45 @@ class _HomePageState extends State<HomePage> {
   DateTime focusedDay = DateTime.now();
   DateTime? _selectedDay;
 
+  // For the list of tasks on the main screen
+  var taskController = Get.put(TaskController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Tasking, simply put."),
       ),
-      drawer: const AppDrawer(),
+      //drawer: const AppDrawer(),
       body: Column(
         children: <Widget>[
           addFormattedDate(),
           addTableDate(),
+          showTasks(),
         ],
       ),
       floatingActionButton: addFloatingActionButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+    );
+  }
+
+  // This is the Expanded widget that holds the tasks the app retrieves from the database
+  showTasks() {
+    return Expanded(
+      child: Obx(() {
+        return ListView.builder(
+          //itemCount: taskController.taskList.length,
+          itemBuilder: (_, context) {
+            print(taskController.taskList.length);
+            return Container(
+              width: 100,
+              height: 50,
+              color: Colors.green,
+              margin: const EdgeInsets.only(bottom: 10),
+            );
+          },
+        );
+      }),
     );
   }
 

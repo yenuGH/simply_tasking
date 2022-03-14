@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:simply_tasking/pages/home_page.dart';
-//import 'package:get_storage/get_storage.dart';
-//import 'package:simply_tasking/utilities/theme_changer.dart';
 import 'package:simply_tasking/utilities/themes.dart';
-import 'package:sqflite/sqflite.dart';
 
 import 'database/database_helper.dart';
 

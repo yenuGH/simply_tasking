@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -23,14 +25,6 @@ class _AddTaskPageState extends State<AddTaskPage> {
 
   // These variables are used to take advantage of setState() to redraw the page once a date/time has been selected
   DateTime selectedDate = DateTime.now();
-  String startTime = DateFormat("h:mm a").format(DateTime.now()).toString();
-  String endTime = DateFormat("h:mm a").format(DateTime.now()).toString();
-
-  int remindTime = 5;
-  List<int> remindTimes = [5, 10, 15, 20, 25, 30];
-
-  String repeatTime = "None";
-  List<String> repeatTimes = ["None", "Daily", "Weekly", "Monthly"];
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +72,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   },
                 ),
               ),
-              // Start Time / End Time
+              /* // Start Time / End Time
               Row(
                 children: <Widget>[
                   Expanded(
@@ -176,7 +170,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                     });
                   },
                 ),
-              ),
+              ), */
               // Add task button
               Container(
                 margin: const EdgeInsets.only(top: 20),
@@ -201,7 +195,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
     return noteController.text;
   }
 
-  validateDate() {
+  validateTask() {
     if (titleController.text.isNotEmpty) {
       sendToDatabase();
       Get.back();
@@ -224,14 +218,10 @@ class _AddTaskPageState extends State<AddTaskPage> {
     int databaseID = await taskController.addTask(TaskData(
       note: noteController.text,
       title: titleController.text,
-      startTime: startTime,
-      endTime: endTime,
       date: DateFormat.yMd().format(selectedDate),
-      reminderTimer: remindTime,
-      repeatInterval: repeatTime,
       isCompleted: 0,
     ));
-    print("Database ID: " + databaseID.toString());
+    print("Database ID value: " + databaseID.toString());
   }
 
   // shows a button for adding a task
@@ -240,7 +230,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
       isExtended: true,
       onPressed: () {
         //Navigator.pop(context);
-        validateDate();
+        validateTask();
       },
       icon: const Icon(
         Icons.add,
@@ -255,7 +245,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
     );
   }
 
-  addTimePicker({required bool isStartTime}) async {
+/*   addTimePicker({required bool isStartTime}) async {
     var timePicker = await createTimePicker();
     String formattedTime = timePicker.format(context);
 
@@ -284,6 +274,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
       initialTime: TimeOfDay.now(),
     );
   }
+ */
 
   // creates the widget for showing a calendar date picker
   Future<DateTime?> createDatePicker() async {
@@ -299,7 +290,6 @@ class _AddTaskPageState extends State<AddTaskPage> {
         selectedDate = datePicker;
       });
     } else {
-      // ignore: avoid_print
       print("Invalid date has been selected, somehow.");
     }
     return datePicker;

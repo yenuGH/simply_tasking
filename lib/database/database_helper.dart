@@ -5,8 +5,8 @@ import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
   static Database? _database;
-  static final int _version = 1;
-  static final String _tableName = "task";
+  static const int _version = 1;
+  static const String _tableName = "tasks";
 
   static Future<void> initDatabase() async {
     if (_database != null) {
@@ -21,8 +21,6 @@ class DatabaseHelper {
           "CREATE TABLE $_tableName("
           "id INTEGER PRIMARY KEY AUTOINCREMENT,"
           "title STRING, note TEXT, date STRING,"
-          "startTime STRING, endTime STRING,"
-          "reminderTimer INTEGER, repeatInterval STRING,"
           "isCompleted INTEGER)",
         );
       });
@@ -34,5 +32,10 @@ class DatabaseHelper {
   static Future<int> insert(TaskData? task) async {
     print("Inserting a new task...");
     return await _database?.insert(_tableName, task!.toJson()) ?? 1;
+  }
+
+  static Future<List<Map<String, dynamic>>> query() async {
+    print("Query function called.");
+    return await _database!.query(_tableName);
   }
 }

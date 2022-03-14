@@ -6,22 +6,19 @@ class TaskData {
   String? note;
   int? isCompleted;
   String? date;
-  String? startTime;
-  String? endTime;
-  int? reminderTimer;
-  String? repeatInterval;
+  //String? startTime;
+  //String? endTime;
+  //int? reminderTimer;
+  //String? repeatInterval;
 
   // Initializing data
-  TaskData(
-      {this.id,
-      this.title,
-      this.note,
-      this.isCompleted,
-      this.date,
-      this.startTime,
-      this.endTime,
-      this.reminderTimer,
-      this.repeatInterval});
+  TaskData({
+    this.id,
+    this.title,
+    this.note,
+    this.isCompleted,
+    this.date,
+  });
 
   // Converting task data to json object with a map
   Map<String, dynamic> toJson() {
@@ -32,24 +29,24 @@ class TaskData {
     data['note'] = note;
     data['isCompleted'] = isCompleted;
     data['date'] = date;
-    data['startTime'] = startTime;
-    data['endTime'] = endTime;
-    data['reminderTimer'] = reminderTimer;
-    data['repeatInterval'] = repeatInterval;
+    //data['startTime'] = startTime;
+    //data['endTime'] = endTime;
+    //data['reminderTimer'] = reminderTimer;
+    //data['repeatInterval'] = repeatInterval;
 
     return data;
   }
 
   // Converting json object to task data
-  fromJson(Map<String, dynamic> json) {
+  TaskData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
     note = json['note'];
     isCompleted = json['isCompleted'];
     date = json['date'];
-    startTime = json['startTime'];
-    endTime = json['endTime'];
-    reminderTimer = json['reminderTimer'];
-    repeatInterval = json['repeatInterval'];
+    //startTime = json['startTime'];
+    //endTime = json['endTime'];
+    //reminderTimer = json['reminderTimer'];
+    //repeatInterval = json['repeatInterval'];
   }
 }
